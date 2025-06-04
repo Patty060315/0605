@@ -73,7 +73,7 @@ function draw() {
     fill(0, 102, 204);
     stroke(255);
     strokeWeight(4);
-    text("教育科技:結合教育的理論與科技的應用", width / 2, height / 2);
+    text("結合教育的理論與科技的應用", width / 2, height / 2);
     pop();
 
     // 5秒後恢復動畫
