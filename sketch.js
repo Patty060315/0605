@@ -44,8 +44,46 @@ function setup() {
   bridge = new Bridge(num, radius, length);
 }
 
+let pause = false;
+let pauseStart = 0;
+let pauseDuration = 5000; // 5秒
+
 function draw() {
   background(220);
+
+  // 暫停時顯示訊息並跳過動畫
+  if (pause) {
+    // Draw the webcam video
+    image(video, 0, 0, width, height);
+
+    // 標題
+    push();
+    textAlign(CENTER, TOP);
+    textSize(36);
+    stroke(255);
+    strokeWeight(6);
+    fill(30, 30, 30);
+    text("TKUET", width / 2, 16);
+    pop();
+
+    // 顯示暫停訊息
+    push();
+    textAlign(CENTER, CENTER);
+    textSize(32);
+    fill(0, 102, 204);
+    stroke(255);
+    strokeWeight(4);
+    text("結合教育的理論與科技的應用", width / 2, height / 2);
+    pop();
+
+    // 5秒後恢復動畫
+    if (millis() - pauseStart > pauseDuration) {
+      pause = false;
+      circles = []; // 清空球
+    }
+    return;
+  }
+
   Engine.update(engine);
   strokeWeight(2);
   stroke(0);
@@ -53,7 +91,7 @@ function draw() {
   // Draw the webcam video
   image(video, 0, 0, width, height);
 
-  // 在畫面上方中間顯示固定的標題文字 "TKUET"
+  // 標題
   push();
   textAlign(CENTER, TOP);
   textSize(36);
@@ -67,7 +105,7 @@ function draw() {
     circles.push(new Circle());
   }
 
-  for (let i=circles.length-1; i>=0; i--) {
+  for (let i = circles.length - 1; i >= 0; i--) {
     circles[i].checkDone();
     circles[i].display();
 
@@ -75,6 +113,12 @@ function draw() {
       circles[i].removeCircle();
       circles.splice(i, 1);
     }
+  }
+
+  // 檢查是否有10顆球碰到繩子
+  if (circles.length >= 10) {
+    pause = true;
+    pauseStart = millis();
   }
 
   if (hands.length > 0) {
@@ -87,8 +131,8 @@ function draw() {
 
     bridge.bodies[0].position.x = thumb.x;
     bridge.bodies[0].position.y = thumb.y;
-    bridge.bodies[bridge.bodies.length-1].position.x = index.x;
-    bridge.bodies[bridge.bodies.length-1].position.y = index.y;
+    bridge.bodies[bridge.bodies.length - 1].position.x = index.x;
+    bridge.bodies[bridge.bodies.length - 1].position.y = index.y;
     bridge.display();
   }
 }
