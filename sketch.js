@@ -50,7 +50,10 @@ function draw() {
   strokeWeight(2);
   stroke(0);
 
-  // 在畫面最上方中間顯示標題文字
+  // 先畫出攝影機畫面
+  image(video, 0, 0, width, height);
+
+  // 在畫面最上方中間顯示標題文字（移到這裡）
   push();
   textAlign(CENTER, TOP);
   textSize(32);
@@ -62,9 +65,6 @@ function draw() {
   fill(30, 30, 30);
   text("淡江教育科技系", width / 2, 10);
   pop();
-
-  // Draw the webcam video
-  image(video, 0, 0, width, height);
 
   if (random() < 0.1) {
     circles.push(new Circle());
