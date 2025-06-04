@@ -49,25 +49,34 @@ function draw() {
   Engine.update(engine);
   strokeWeight(2);
   stroke(0);
-  
+
   // Draw the webcam video
   image(video, 0, 0, width, height);
-  
+
+  // 在畫面上方中間顯示固定的標題文字 "TKUET"
+  push();
+  textAlign(CENTER, TOP);
+  textSize(36);
+  stroke(255);
+  strokeWeight(6);
+  fill(30, 30, 30);
+  text("TKUET", width / 2, 16);
+  pop();
+
   if (random() < 0.1) {
     circles.push(new Circle());
   }
-  
+
   for (let i=circles.length-1; i>=0; i--) {
     circles[i].checkDone();
     circles[i].display();
-    
+
     if (circles[i].done) {
       circles[i].removeCircle();
       circles.splice(i, 1);
     }
-    
   }
-  
+
   if (hands.length > 0) {
     let thumb = hands[0].keypoints[THUMB_TIP];
     let index = hands[0].keypoints[INDEX_FINGER_TIP];
@@ -75,15 +84,13 @@ function draw() {
     noStroke();
     circle(thumb.x, thumb.y, 10);
     circle(index.x, index.y, 10);
-    
+
     bridge.bodies[0].position.x = thumb.x;
     bridge.bodies[0].position.y = thumb.y;
     bridge.bodies[bridge.bodies.length-1].position.x = index.x;
     bridge.bodies[bridge.bodies.length-1].position.y = index.y;
     bridge.display();
   }
-  
-  
 }
 
 // Callback function for when handPose outputs data
