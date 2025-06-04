@@ -22,7 +22,7 @@ let engine;
 let bridge; let num = 10; let radius = 10; let length = 25;
 let circles = [];
 
-let colorPalette = ["#abcd5e", "#14976b", "#2b67af", "#62b6de", "#f589a3", "#ef562f", "#fc8405", "#f9d531"]; 
+let colorPalette = ["#9a8c98", "#dedbd2", "#adb5bd", "#d5bdaf", "#d6ccc2", "#edafb8", "#b79ced", "#c9ada7"]; 
 
 function preload() {
   // Load the handPose model
