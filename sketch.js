@@ -53,10 +53,9 @@ function draw() {
 
   // 暫停時顯示訊息並跳過動畫
   if (pause) {
-    // Draw the webcam video
     image(video, 0, 0, width, height);
 
-    // 標題
+    // 上方標題
     push();
     textAlign(CENTER, TOP);
     textSize(36);
@@ -66,7 +65,7 @@ function draw() {
     text("TKUET", width / 2, 16);
     pop();
 
-    // 顯示暫停訊息
+    // 中間暫停訊息
     push();
     textAlign(CENTER, CENTER);
     textSize(32);
@@ -76,10 +75,9 @@ function draw() {
     text("結合教育的理論與科技的應用", width / 2, height / 2);
     pop();
 
-    // 5秒後恢復動畫
     if (millis() - pauseStart > pauseDuration) {
       pause = false;
-      circles = []; // 清空球
+      circles = [];
     }
     return;
   }
@@ -88,10 +86,9 @@ function draw() {
   strokeWeight(2);
   stroke(0);
 
-  // Draw the webcam video
   image(video, 0, 0, width, height);
 
-  // 標題
+  // 上方標題
   push();
   textAlign(CENTER, TOP);
   textSize(36);
@@ -99,6 +96,16 @@ function draw() {
   strokeWeight(6);
   fill(30, 30, 30);
   text("TKUET", width / 2, 16);
+  pop();
+
+  // 下方固定標題
+  push();
+  textAlign(CENTER, BOTTOM);
+  textSize(24);
+  fill(30, 30, 30);
+  stroke(255);
+  strokeWeight(4);
+  text("當繩子碰到球，便跳出一段文字", width / 2, height - 16);
   pop();
 
   if (random() < 0.1) {
@@ -115,7 +122,6 @@ function draw() {
     }
   }
 
-  // 檢查是否有10顆球碰到繩子
   if (circles.length >= 10) {
     pause = true;
     pauseStart = millis();
